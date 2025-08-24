@@ -19,6 +19,44 @@ iframe.loaded {
   opacity: 1;
 }
 
+/* Dark mode */
+body.dark-mode {
+  background: linear-gradient(to bottom right, #1a202c, #2d3748);
+}
+
+body.dark-mode header {
+  background-color: #2b6cb0;
+}
+
+body.dark-mode footer {
+  background-color: #2b6cb0;
+}
+
+body.dark-mode #welcome-page h1,
+body.dark-mode #name-page h1,
+body.dark-mode #chat-page h2 {
+  color: #e2e8f0;
+}
+
+body.dark-mode #welcome-page p,
+body.dark-mode .text-gray-600 {
+  color: #a0aec0;
+}
+
+body.dark-mode .bg-white {
+  background-color: #2d3748;
+  color: #e2e8f0;
+}
+
+body.dark-mode .border-gray-300 {
+  border-color: #4a5568;
+}
+
+body.dark-mode .loading-spinner {
+  border-color: #4a5568;
+  border-top-color: #4299e1;
+}
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .container {
@@ -28,8 +66,8 @@ iframe.loaded {
   .text-3xl {
     font-size: 1.75rem;
   }
-  .relative[style*="padding-top"] {
-    padding-top: 75% !important;
+  .relative {
+    height: 400px !important; /* Override inline style for better mobile */
   }
 }
 
@@ -37,7 +75,20 @@ iframe.loaded {
   .text-3xl {
     font-size: 1.5rem;
   }
-  .relative[style*="padding-top"] {
-    padding-top: 85% !important;
+  .relative {
+    height: 300px !important;
   }
+}
+
+/* Additional styles for better UX */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.shadow-lg:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
