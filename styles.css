@@ -1,0 +1,43 @@
+/* Custom animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Iframe loaded state */
+iframe.loaded {
+  opacity: 1;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+  .relative[style*="padding-top"] {
+    padding-top: 75% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  .relative[style*="padding-top"] {
+    padding-top: 85% !important;
+  }
+}

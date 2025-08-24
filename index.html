@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chat Assistant</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="font-inter bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex items-center justify-center">
+  <div id="welcome-page" class="container mx-auto px-4 py-8 max-w-md">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">Welcome to AI Chat Assistant</h1>
+    <p class="text-center text-gray-600 mb-8">Please select your language to continue</p>
+    <div class="flex justify-center space-x-4">
+      <button id="lang-english" class="lang-btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">English</button>
+      <button class="lang-btn bg-gray-300 text-gray-500 px-6 py-3 rounded-lg cursor-not-allowed" disabled>Tamil</button>
+      <button class="lang-btn bg-gray-300 text-gray-500 px-6 py-3 rounded-lg cursor-not-allowed" disabled>Sinhala</button>
+    </div>
+  </div>
+
+  <div id="name-page" class="hidden container mx-auto px-4 py-8 max-w-md">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">What's Your Name?</h1>
+    <form id="name-form" class="flex flex-col items-center">
+      <input type="text" id="user-name" class="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" required>
+      <button type="submit" class="bg-blue-600 text-White px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Submit</button>
+    </form>
+  </div>
+
+  <div id="chat-page" class="hidden container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">Hello, <span id="display-name"></span>!</h1>
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-lg p-6 transition-transform hover:shadow-xl">
+        <h2 class="text-xl font-semibold text-blue-600 text-center mb-4">AI Chat Assistant</h2>
+        <div class="relative w-full" style="padding-top: 56.25%;">
+          <div class="loading-spinner absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin" id="loading-spinner"></div>
+          <iframe id="ai-assistant" src="https://w8tzvne9.chat.qbusiness.us-east-1.on.aws/" class="absolute top-0 left-0 w-full h-full rounded-lg opacity-0 transition-opacity duration-500" frameborder="0" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" title="AI Chat Assistant"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
