@@ -3,50 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Chat Assistant</title>
+  <title>SLT AI Chat Assistant</title>
   <!-- Tailwind CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="font-inter bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex items-center justify-center">
-  <div id="welcome-page" class="container mx-auto px-4 py-8 max-w-md">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">Welcome to AI Chat Assistant</h1>
-    <p class="text-center text-gray-600 mb-8">Please select your language to continue</p>
-    <div class="flex justify-center space-x-4">
-      <button id="lang-english" class="lang-btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">English</button>
-      <button class="lang-btn bg-gray-300 text-gray-500 px-6 py-3 rounded-lg cursor-not-allowed" disabled>Tamil</button>
-      <button class="lang-btn bg-gray-300 text-gray-500 px-6 py-3 rounded-lg cursor-not-allowed" disabled>Sinhala</button>
+<body class="font-inter bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">SLT AI Chat Assistant</h1>
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="text-white hover:text-gray-200">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="logout-btn" class="hidden text-white hover:text-gray-200">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div id="name-page" class="hidden container mx-auto px-4 py-8 max-w-md">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">What's Your Name?</h1>
-    <form id="name-form" class="flex flex-col items-center">
-      <input type="text" id="user-name" class="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" required>
-      <button type="submit" class="bg-blue-600 text-White px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Submit</button>
-    </form>
-  </div>
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center">
+    <div id="welcome-page" class="container mx-auto px-4 py-8 max-w-md">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">Welcome to SLT AI Chat Assistant</h1>
+      <p class="text-center text-gray-600 mb-8">Please select your language to continue</p>
+      <div class="flex justify-center space-x-4">
+        <button id="lang-english" class="lang-btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">English</button>
+        <button id="lang-tamil" class="lang-btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Tamil</button>
+        <button id="lang-sinhala" class="lang-btn bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Sinhala</button>
+      </div>
+      <p class="text-center text-gray-500 mt-4 text-sm">Note: Tamil and Sinhala support coming soon. Currently, chat is in English.</p>
+    </div>
 
-  <div id="chat-page" class="hidden container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">Hello, <span id="display-name"></span>!</h1>
-    <div class="max-w-3xl mx-auto">
-      <div class="bg-white rounded-2xl shadow-lg p-6 transition-transform hover:shadow-xl">
-        <h2 class="text-xl font-semibold text-blue-600 text-center mb-4">AI Chat Assistant</h2>
-        <div class="relative w-full" style="padding-top: 56.25%;">
+    <div id="name-page" class="hidden container mx-auto px-4 py-8 max-w-md">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 animate-fade-in">What's Your Name?</h1>
+      <form id="name-form" class="flex flex-col items-center">
+        <input type="text" id="user-name" class="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" required>
+        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Submit</button>
+      </form>
+    </div>
+
+    <div id="chat-page" class="hidden container mx-auto px-4 py-8 w-full max-w-4xl">
+      <div class="bg-white rounded-2xl shadow-lg p-6">
+        <h2 class="text-xl font-semibold text-blue-600 text-center mb-4">Hello, <span id="display-name"></span>!</h2>
+        <div class="relative w-full h-96 md:h-[calc(100vh-200px)]">
           <div class="loading-spinner absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin" id="loading-spinner"></div>
           <iframe
-  id="ai-assistant"
-  src="https://sx0tp9vv.chat.qbusiness.ap-southeast-2.on.aws/"
-  class="absolute top-0 left-0 w-full h-full rounded-lg opacity-0 transition-opacity duration-500"
-  frameborder="0"
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-  title="AI Chat Assistant">
-</iframe>
-
+            id="ai-assistant"
+            src="https://sx0tp9vv.chat.qbusiness.ap-southeast-2.on.aws/"
+            class="absolute top-0 left-0 w-full h-full rounded-lg opacity-0 transition-opacity duration-500"
+            frameborder="0"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+            title="AI Chat Assistant">
+          </iframe>
         </div>
       </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white p-4 text-center">
+    <p>&copy; 2025 SLT AI Chat Assistant. Powered by AWS Q Business.</p>
+  </footer>
+
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full">
+      <h2 class="text-xl font-bold mb-4">Provide Feedback</h2>
+      <form id="feedback-form">
+        <textarea id="feedback-text" class="w-full p-3 border border-gray-300 rounded-lg mb-4" placeholder="Your feedback..." required></textarea>
+        <div class="flex justify-end space-x-2">
+          <button type="button" onclick="closeFeedbackModal()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
 
