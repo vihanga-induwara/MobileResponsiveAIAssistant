@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
       namePage.classList.add('hidden');
       chatPage.classList.remove('hidden');
       logoutBtn.classList.remove('hidden');
+      // Dynamically set iframe src
+      iframe.src = 'https://sx0tp9vv.chat.qbusiness.ap-southeast-2.on.aws/';
     }
   });
 
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   iframe.onerror = () => {
     spinner.style.display = 'none';
-    alert('Failed to load the chat assistant. Please try again later.');
+    alert('Failed to load the chat assistant. This may be due to cookie restrictions, browser settings, or server policies. Please ensure third-party cookies are enabled and try again.');
   };
 
   // Dark mode toggle
@@ -70,8 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
     displayName.textContent = '';
   });
 
+  // Cookie consent modal
+  window.openCookieConsentModal = () => {
+    if (/Mobi|Android|iPhone|iPad/.test(navigator.userAgent)) {
+      feedbackModal.classList.add('hidden');
+      document.getElementById('cookie-consent-modal').classList.remove('hidden');
+    }
+  };
+
+  window.closeCookieConsentModal = () => {
+    document.getElementById('cookie-consent-modal').classList.add('hidden');
+  };
+
+  // Show cookie consent modal on mobile devices
+  openCookieConsentModal();
+
   // Feedback modal
   window.openFeedbackModal = () => {
+    document.getElementById('cookie-consent-modal').classList.add('hidden');
     feedbackModal.classList.remove('hidden');
   };
 
